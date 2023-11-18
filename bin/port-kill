@@ -1,0 +1,12 @@
+if [ $# -ne 1 ]; then
+    echo "Usage: port-kill <port>"
+else
+    PORT=$1
+    PID=$(lsof -ti :$PORT)
+    if [ -n "$PID" ]; then
+        echo "Killing process $PID using port $PORT"
+        kill -9 $PID
+    else
+        echo "No process found using port $PORT"
+    fi
+fi
